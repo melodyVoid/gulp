@@ -12,3 +12,28 @@ gulp.task("hello", function () {
 });
 
 //让任务运行还是借助命令行
+
+//拷贝文件
+//dest---destination  目的地,终点
+/*
+ gulp.task("dest", function () {
+ //获取文件
+ gulp.src("src/index.html")
+ .pipe(gulp.dest("dist/"))
+ });*/
+
+gulp.task("dest", function () {
+    //获取文件
+    gulp.src("src/**/*.*")      //**表示递归加载,意思是取到所有文件
+        //让文件走向下一个流程
+        .pipe(gulp.dest("dist/"))
+});
+
+//默认任务
+gulp.task("default", function () {
+    console.log("这是默认任务");
+    //当src目录下的文件发生变化时,自动执行后面的任务
+    gulp.watch("src/*",["dest"]);
+});
+
+//gulp原生不支持任何功能,只提供最基础的API
